@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: arm-sample-app
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      config:
+        enabled: true
+      discovery:
+        register-health-check: true
+        instanceId: ${spring.application.name}:${random.value}
+    config:
+      enabled: true

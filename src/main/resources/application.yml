@@ -1,0 +1,40 @@
+spring:
+  #profiles:
+    #active: native
+  application:
+    name: my-sample-app
+  cloud:
+    consul:
+      ribbon:
+        enabled: true
+      discovery:
+        instanceId: ${spring.application.name}:${random.value}          
+        queryPassing: true
+    config:
+      failFast: true
+      server: 
+        #native: 
+        #  searchLocations: file:///C:/java_dev/config-repo
+        git:
+          uri: https://github.com/sukhrajm/test-work.git
+          skipSslValidation: true
+          ignoreLocalSshSettings: true
+          hostKeyAlgorithm: ssh-rsa
+          privateKey: |
+                         -----BEGIN RSA PRIVATE KEY-----
+                          xxx
+                          -----END RSA PRIVATE KEY-----
+    loadbalancer: 
+      retry: 
+        enabled: true
+        
+ribbon:
+  NFLoadBalancerRuleClassName: com.netflix.loadbalancer.AvailabilityFilteringRule
+  NFLoadBalancerPingClassName: com.netflix.loadbalancer.PingUrl
+  ServerListRefreshInterval: 10000
+  MaxAutoRetries: 3
+  MaxAutoRetriesNextServer: 3
+  OkToRetryOnAllOperations: true
+  retryableStatusCodes: 500
+    
+      
