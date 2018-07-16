@@ -1,6 +1,6 @@
 spring:
   application:
-    name: arm-sample-app
+    name: arm-sample-server
   cloud:
     consul:
       host: localhost
